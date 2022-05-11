@@ -70,7 +70,7 @@ const buildTeam = () => {
       {
         type: "checkbox",
         name: "add",
-        message: "Would you like to a team member?",
+        message: "Would you like to add a team member?",
         choices: ["No", "Add Engineer", "Add Intern"],
         validate: (addInput) => {
           console.log(input);
@@ -90,16 +90,129 @@ const buildTeam = () => {
   console.log("we are here 1");
 };
 
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {
-  fs.writeFile(fileName, data, (err) => {
-    if (err) {
-      return console.log(err);
-    }
+const addEngineer = () => {
+  return inquirer.prompt([
+    {
+      type: "input",
+      name: "name",
+      message: "What is the employee's name? (required)",
+      validate: (nameInput) => {
+        if (nameInput) {
+          return true;
+        } else {
+          console.log("Please enter the employee's name.");
+          return false;
+        }
+      },
+    },
+    {
+      type: "input",
+      name: "id",
+      message: "What is their employee ID? (required)",
+      validate: (idInput) => {
+        if (idInput) {
+          return true;
+        } else {
+          console.log("Please enter their employee's ID.");
+          return false;
+        }
+      },
+    },
+    {
+      type: "input",
+      name: "email",
+      message: "What is their email address? (required)",
+      validate: (emailInput) => {
+        if (emailInput) {
+          return true;
+        } else {
+          console.log("Please enter their email address.");
+          return false;
+        }
+      },
+    },
+    {
+      type: "input",
+      name: "github",
+      message: "What is the engineer's GitHub username? (required)",
+      validate: (githubInput) => {
+        if (githubInput) {
+          return true;
+        } else {
+          console.log("Please enter their GitHub username.");
+          return false;
+        }
+      },
+    },
+  ]);
+};
+const addIntern = () => {
+  return inquirer.prompt([
+    {
+      type: "input",
+      name: "name",
+      message: "What is the employee's name? (required)",
+      validate: (nameInput) => {
+        if (nameInput) {
+          return true;
+        } else {
+          console.log("Please enter the employee's name.");
+          return false;
+        }
+      },
+    },
+    {
+      type: "input",
+      name: "id",
+      message: "What is their employee ID? (required)",
+      validate: (idInput) => {
+        if (idInput) {
+          return true;
+        } else {
+          console.log("Please enter their employee's ID.");
+          return false;
+        }
+      },
+    },
+    {
+      type: "input",
+      name: "email",
+      message: "What is their email address? (required)",
+      validate: (emailInput) => {
+        if (emailInput) {
+          return true;
+        } else {
+          console.log("Please enter their email address.");
+          return false;
+        }
+      },
+    },
+    {
+      type: "input",
+      name: "school",
+      message: "Please provide the school they are attending.",
+      validate: (schoolInput) => {
+        if (schoolInput) {
+          return true;
+        } else {
+          console.log("Please provide the school they are attending.");
+          return false;
+        }
+      },
+    },
+  ]);
+};
 
-    console.log("You can now see your README file.");
-  });
-}
+// TODO: Create a function to write README file
+// function writeToFile(fileName, data) {
+//   fs.writeFile(fileName, data, (err) => {
+//     if (err) {
+//       return console.log(err);
+//     }
+
+//     console.log("You can now see your README file.");
+//   });
+// }
 
 // TODO: Create a function to initialize app
 function init() {
