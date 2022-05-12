@@ -1,11 +1,12 @@
 // TODO: Include packages needed for this application
 const inquirer = require("inquirer");
 const fs = require("fs");
+const createSite = require("./src/htmltemplate.js");
 const { resolve } = require("path");
 const { response } = require("express");
 const members = [];
 
-// TODO: Create an array of questions for team input
+//add manager - first person to be added to the team
 const addManager = () => {
   return inquirer
     .prompt([
@@ -61,6 +62,7 @@ const addManager = () => {
     });
 };
 
+//add more team members or write html
 const buildTeam = () => {
   return inquirer
     .prompt([
@@ -80,9 +82,9 @@ const buildTeam = () => {
         writeToFile();
       }
     });
-  console.log("we are here 1");
 };
 
+//add engineer
 const addEngineer = () => {
   return inquirer
     .prompt([
@@ -145,6 +147,8 @@ const addEngineer = () => {
       buildTeam();
     });
 };
+
+//add intern
 const addIntern = () => {
   return inquirer
     .prompt([
@@ -208,23 +212,11 @@ const addIntern = () => {
     });
 };
 
-// TODO: Create a function to write html file
-function writeToFile(fileName, data) {
-  fs.writeFile(fileName, data, (err) => {
-    if (err) {
-      return console.log(err);
-    }
+//Create a function to write html file
+const writeToFile = () => {
+  console.log("we here");
+  fs.writeFile("./dist/index.html", createSite(members), "utf-8");
+};
 
-    console.log("You can now see your README file.");
-  });
-}
-
-// TODO: Create a function to initialize app
-function init() {
-  addManager().then(function (userInput) {
-    console.log("we are here 2");
-  });
-}
-
-// Function call to initialize app
-init();
+// Function call to initialize app by first adding manager
+addManager();
