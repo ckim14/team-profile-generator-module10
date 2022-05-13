@@ -1,4 +1,54 @@
-const outputHTML = () => {
+const { type } = require("express/lib/response");
+
+//generate cards
+const generateManager = (member) => {
+  return `<li>Office Number: ${member.office}</li>`;
+};
+
+const generateEngineer = (member) => {
+  return `<li>GitHub:<a href="https://github.com/${member.github}" class="card-link"> ${member.github}</a></li>`;
+};
+
+const generateIntern = (member) => {
+  return `<li>School: ${member.school}</li>`;
+};
+
+const genMemberHtml = (member) => {
+  var typeAttrs = "";
+  switch (member.type) {
+    case "intern":
+      typeAttrs = generateIntern(member);
+      break;
+    case "manager":
+      typeAttrs = generateManager(member);
+      break;
+    case "engineer":
+      typeAttrs = generateEngineer(member);
+      break;
+    default:
+      console.error("unknown member type provided: " + member.type);
+      return "";
+  }
+
+  return `<div class="card " style="width: 18rem;">
+    <div class="card-header text-white bg-primary mb-3">
+      <h5>${member.name}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">${member.type}</h6>
+    </div>
+    <div class="card-info"> 
+        <ul>
+        <li>Employee ID: ${member.id}</li>
+        <li>Email: <a href="mailto:${member.email}" class="card-link">${member.email}</a></li>
+        ${typeAttrs}
+        </ul>
+    </div>
+  </div>`;
+};
+
+//generate site
+
+//export function to generate entire page
+module.exports = (members) => {
   return `<head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,7 +71,7 @@ const outputHTML = () => {
   </div>
   <div class="container-fluid">
       <div class="row">
-      ${members}
+     ${members.map(genMemberHtml).join("")}
       </div>
   </div>
 </body>`;

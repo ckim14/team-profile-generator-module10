@@ -4,7 +4,7 @@ const fs = require("fs");
 const createSite = require("./src/htmltemplate.js");
 const { resolve } = require("path");
 const { response } = require("express");
-const members = [];
+const allEmployees = [];
 
 //add manager - first person to be added to the team
 const addManager = () => {
@@ -57,13 +57,13 @@ const addManager = () => {
     ])
     .then((answers) => {
       console.log(answers);
-      members.push({ type: "manager", ...answers });
-      buildTeam();
+      allEmployees.push({ type: "manager", ...answers });
+      addMembers();
     });
 };
 
 //add more team members or write html
-const buildTeam = () => {
+const addMembers = () => {
   return inquirer
     .prompt([
       {
@@ -143,8 +143,8 @@ const addEngineer = () => {
     ])
     .then((answers) => {
       console.log(answers);
-      members.push({ type: "engineer", ...answers });
-      buildTeam();
+      allEmployees.push({ type: "engineer", ...answers });
+      addMembers();
     });
 };
 
@@ -207,16 +207,17 @@ const addIntern = () => {
     ])
     .then((answers) => {
       console.log(answers);
-      members.push({ type: "intern", ...answers });
-      buildTeam();
+      allEmployees.push({ type: "intern", ...answers });
+      addMembers();
     });
 };
 
 //Create a function to write html file
-const writeToFile = () => {
-  console.log("we here");
-  fs.writeFile("./dist/index.html", createSite(members), "utf-8");
-};
+function writeToFile() {
+  fs.writeFile("./dist/index.html", createSite(allEmployees), "utf-8", () => {
+    console.log("Your team page is done! Checkout index.html file.");
+  });
+}
 
 // Function call to initialize app by first adding manager
 addManager();
