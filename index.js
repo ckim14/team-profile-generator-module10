@@ -57,7 +57,7 @@ const addManager = () => {
     ])
     .then((answers) => {
       console.log(answers);
-      allEmployees.push({ type: "manager", ...answers });
+      allEmployees.push({ type: "Manager", ...answers });
       addMembers();
     });
 };
@@ -143,7 +143,7 @@ const addEngineer = () => {
     ])
     .then((answers) => {
       console.log(answers);
-      allEmployees.push({ type: "engineer", ...answers });
+      allEmployees.push({ type: "Engineer", ...answers });
       addMembers();
     });
 };
@@ -207,7 +207,7 @@ const addIntern = () => {
     ])
     .then((answers) => {
       console.log(answers);
-      allEmployees.push({ type: "intern", ...answers });
+      allEmployees.push({ type: "Intern", ...answers });
       addMembers();
     });
 };

@@ -1,6 +1,6 @@
 const { type } = require("express/lib/response");
 
-//generate cards
+//generate cards for each employee
 const generateManager = (member) => {
   return `<li>Office Number: ${member.office}</li>`;
 };
@@ -16,13 +16,13 @@ const generateIntern = (member) => {
 const genMemberHtml = (member) => {
   var typeAttrs = "";
   switch (member.type) {
-    case "intern":
+    case "Intern":
       typeAttrs = generateIntern(member);
       break;
-    case "manager":
+    case "Manager":
       typeAttrs = generateManager(member);
       break;
-    case "engineer":
+    case "Engineer":
       typeAttrs = generateEngineer(member);
       break;
     default:
@@ -30,10 +30,10 @@ const genMemberHtml = (member) => {
       return "";
   }
 
-  return `<div class="card " style="width: 18rem;">
+  return `<div class="card" style="width: 18rem;">
     <div class="card-header text-white bg-primary mb-3">
       <h5>${member.name}</h5>
-      <h6 class="card-subtitle mb-2 text-muted">${member.type}</h6>
+      <h6 class="card-subtitle mb-2">${member.type}</h6>
     </div>
     <div class="card-info"> 
         <ul>
@@ -64,15 +64,14 @@ module.exports = (members) => {
       integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
       crossorigin="anonymous"
   />
+  <link rel="stylesheet" href="./stylesheet.css" />
 </head>
 <body>
-  <div class = "header bg-info">
-  <h1 class="display-5 text-black text-center">Team Members</h1>
+  <div class ="header bg-danger">
+  <h1 class="display-5 text-white mx-auto">Team Members</h1>
   </div>
-  <div class="container-fluid">
-      <div class="row">
+  <div class="card-container container-fluid row">
      ${members.map(genMemberHtml).join("")}
-      </div>
   </div>
 </body>`;
 };
