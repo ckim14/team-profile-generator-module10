@@ -26,7 +26,7 @@ test("test if we can get the email from getEmail()", () => {
 });
 
 test("test if we can get the school name from getSchool()", () => {
-  expect(intern.getGitHub()).toBe("Rutgers University");
+  expect(intern.getSchool()).toBe("Rutgers University");
 });
 
 test("test if we can get the role from the getRole() method", () => {
