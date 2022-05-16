@@ -16,13 +16,13 @@ The application uses Jest for running the unit tests and Inquirer for collecting
 
 ## Built With:
 
-HTML
-CSS
-JavaScript
-Node.js
-Inquirer
-Path
-Jest
+* HTML
+* CSS
+* JavaScript
+* Node.js
+* Inquirer
+* Path
+* Jest
 
 ## Questions:
 
